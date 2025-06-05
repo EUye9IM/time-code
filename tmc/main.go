@@ -14,7 +14,7 @@ func main() {
 	ny := time.Now().Year()
 	d := flag.Bool("d", false, "decode")
 	b := flag.Int("b", ny, fmt.Sprintf("baseyear; default %v", ny))
-	f := flag.String("f", "", "time format; use Unix time defaultly")
+	f := flag.String("f", "06/1/2.15", "time format; '' for unix timestamp")
 	flag.Parse()
 	cmd := fmt.Sprint(flag.Args())
 	cmd = cmd[1 : len(cmd)-1]

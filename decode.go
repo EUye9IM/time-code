@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -15,6 +16,7 @@ func Decode(data string, baseYear *int) (time.Time, error) {
 	if len(data) != 4 {
 		return t, errors.New("invalid lenth")
 	}
+	data = strings.ToUpper(data)
 	b, err := base32.StdEncoding.DecodeString(data + "AAA=")
 	if err != nil {
 		return t, errors.New("invalid charactor")
