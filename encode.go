@@ -14,5 +14,5 @@ func Encode(t time.Time) string {
 	data := uint32((y%250)<<12 | int(m)<<8 | d<<3 | (h / 3))
 	bytebuf := bytes.NewBuffer([]byte{})
 	binary.Write(bytebuf, binary.BigEndian, data<<12)
-	return base32.StdEncoding.EncodeToString(bytebuf.Bytes())[:4]
+	return base32.NewEncoding(CodeStr).EncodeToString(bytebuf.Bytes())[:4]
 }

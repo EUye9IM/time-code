@@ -12,14 +12,12 @@ import (
 
 func main() {
 	ny := time.Now().Year()
-	d := flag.Bool("d", false, "decode")
+	d := flag.String("d", "", "decode")
 	b := flag.Int("b", ny, fmt.Sprintf("baseyear; default %v", ny))
 	f := flag.String("f", "06/1/2.15", "time format; '' for unix timestamp")
 	flag.Parse()
-	cmd := fmt.Sprint(flag.Args())
-	cmd = cmd[1 : len(cmd)-1]
-	if *d {
-		t, err := tmcode.Decode(cmd, b)
+	if len(*d) > 0 {
+		t, err := tmcode.Decode(*d, b)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %v\n", err.Error())
 			return
@@ -31,6 +29,7 @@ func main() {
 		}
 	} else {
 		var t time.Time
+		cmd := flag.Arg(0)
 		if cmd == "" {
 			t = time.Now()
 		} else {

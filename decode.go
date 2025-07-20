@@ -17,7 +17,7 @@ func Decode(data string, baseYear *int) (time.Time, error) {
 		return t, errors.New("invalid lenth")
 	}
 	data = strings.ToUpper(data)
-	b, err := base32.StdEncoding.DecodeString(data + "AAA=")
+	b, err := base32.NewEncoding(CodeStr).DecodeString(data + Padding)
 	if err != nil {
 		return t, errors.New("invalid charactor")
 	}
